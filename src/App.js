@@ -1,26 +1,82 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
+import Login from './components/Login'
+import SignUp from './components/SignUp'
+import NavBar from './components/NavBar'
+import PlanCreateContainer from './containers/PlanCreateContainer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  state = {
+    user: {}
+  }
+  
+  loginSubmit = (e, user) => {
+    e.preventDefault();
+    console.log('user login', user)
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json',
+        Authorization: `Bearer <token>`
+      },
+      body: JSON.stringify({
+        user: {
+          username: user.username,
+          password: user.password
+        }
+      })
+    })
+    .then(res => res.json())
+    .then(returnData => {
+      localStorage.setItem('token', returnData.token);
+      this.setState({ user: returnData.user });  
+    })
+  }
+  
+  signUpSubmit = (e, user) => {
+    e.preventDefault();
+    console.log('Sign Up User:', user);
+    fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          username: user.username,
+          password: user.password,
+          allergies: user.allergies
+        }
+      })
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log('Response Data', data);
+        this.setState({ user: data.user });
+      });
+  };
+
+
+  render() {
+    return (
+      <Switch>
+        <Route path='/welcome' component={PlanCreateContainer} />
+
+        <Route
+          path='/login'
+          render={() => <Login submitHandler={this.loginSubmit}/>}
+        />
+
+        <Route
+          path='/signup'
+          render={() => <SignUp submitHandler={this.signUpSubmit}/>}
+        />
+      </Switch>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);
