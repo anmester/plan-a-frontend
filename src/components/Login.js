@@ -1,7 +1,9 @@
 import React from 'react';
 import '../App.css';
+import { connect } from 'react-redux'
+import loginUser from '../actions'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     state = {
         username: '',
         password: ''
@@ -15,7 +17,10 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <form onSubmit={e => this.props.submitHandler(e, this.state)}>
+            <form onSubmit={e => {
+                e.preventDefault()
+                this.props.loginSubmit(this.state.username, this.state.password)
+            }}>
             <input
                 type="text"
                 name="username"
@@ -35,3 +40,13 @@ export default class Login extends React.Component {
         );
     }
 }
+
+function mdp(dispatch) {
+    return {
+        loginSubmit: (username, password) => {
+            loginUser(dispatch, {username, password})()
+        }
+    }
+}
+
+export default connect(null, mdp)(Login)
