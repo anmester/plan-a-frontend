@@ -1,20 +1,24 @@
-import {combineReducers} from 'redux'
+import { combineReducers } from "redux";
 
 const defaultState = {
-    user: {}
-}
+  user: {}
+};
 
-function userReducer(state=defaultState.user, action) {
-    switch (action.type){
-        case 'LOGIN_USER':
-            return action.payload;
-        default:
-            return state
-    }
+function userReducer(state = defaultState.user, action) {
+  switch (action.type) {
+    case "LOGIN_USER":
+      return action.payload;
+    case "RETRIEVE_USER":
+      return action.payload;
+    case "SIGN_IN_USER":
+      return action.payload;
+    default:
+      return state;
+  }
 }
 
 const reducer = combineReducers({
-    user: userReducer
-})
+  user: userReducer
+});
 
-export default reducer
+export default reducer;
