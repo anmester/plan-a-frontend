@@ -12,19 +12,19 @@ function loginUser(dispatch, user, history) {
       })
     })
       .then(res => res.json())
-      .then(user => {
-        console.log("user", user);
-        if (user.message === "Invalid username or password") alert("fuck off");
+      .then(data => {
+        if (data.message === "Invalid username or password")
+          alert("Invalid username or password. Please try again");
         else {
-          dispatch({ type: "LOGIN_USER", payload: user });
-          localStorage.setItem("token", user.jwt);
+          localStorage.setItem("token", data.jwt);
+          dispatch({ type: "LOGIN_USER", payload: data.user });
           history.push("/welcome");
         }
       });
   };
 }
 
-function retrieveUser(dispatch, token, history) {
+function retrieveUser(dispatch, token, history, location) {
   return function() {
     return fetch("http://localhost:3000/retrieve_user", {
       method: "GET",
@@ -37,11 +37,20 @@ function retrieveUser(dispatch, token, history) {
       .then(res => res.json())
       .then(user => {
         // check for bad user case at some point
-        console.log("user", user);
-        if (user.message === "Invalid username or password") alert("fuck off");
-        else {
+        if (user.message) {
+          localStorage.removeItem("token");
+          alert("Invalid username or password");
+        } else {
           dispatch({ type: "RETRIEVE_USER", payload: user });
-          history.push("/welcome");
+          if (
+            history.location.pathname === "/login" ||
+            history.location.pathname === "/signup" ||
+            history.location.pathname === "/plana"
+          ) {
+            history.push("/welcome");
+          } else {
+            history.push(location.pathname);
+          }
         }
       });
   };
@@ -64,8 +73,9 @@ function signUp(dispatch, user, history) {
       })
     })
       .then(res => res.json())
-      .then(user => {
-        dispatch({ type: "SIGN_IN_USER", payload: user });
+      .then(data => {
+        localStorage.setItem("token", data.jwt);
+        dispatch({ type: "SIGN_UP_USER", payload: data.user });
         history.push("/welcome");
       });
   };
