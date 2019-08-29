@@ -1,33 +1,107 @@
-.App {
+body {
+  font-family: Helvetica, sans serif;
+}
+
+.container-fluid { 
+  max-width: 1200px; 
+  height: 1000px; 
+  margin-top: 8em
+}
+
+.stop-container { 
+  max-width: 1200px; 
+  height: 1000px; 
+}
+
+.login-card {
+  background: #fff;
+  width: 18em;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   text-align: center;
+  font-size: 20px;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  font-family: "Source Sans Pro"
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.card-block {
+  background: #fff;
+  width: 18em;
+  height: 6em;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  font-size: 20px;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  font-family: "Source Sans Pro"
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+[class*="row"] {
+	margin-bottom: 1em;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+[class*="col-"] {
+	background: #efefef;
+	border: 1px solid #ddd;
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+	width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.recipe_if, .recipe_then {
+    font-weight: bold;
+    font-size: 80px;
 }
+
+.tagline {
+  font-weight: normal;
+  font-size: 44px;
+}
+
+a {
+ font-weight: bold;
+ text-decoration: none;
+ color: #33CCFF;
+}
+
+.welcome-container {
+  margin: 0px auto;
+  width: 700px;
+  margin-top: 90px;
+}
+
+.slottt-machine-recipe {
+  margin: 0px auto;
+  width: 700px;
+  margin-top: 50px;
+}
+
+.slottt-machine-recipe__mask {
+    width: 100%;
+    height: 150px;
+    overflow: hidden; 
+    position: relative;
+    display: inline-block;
+    margin-bottom: -40px;
+}
+
+.slottt-machine-recipe__items_container {
+    position: absolute;
+}
+
+.slottt-machine-recipe__item {
+    min-height: 150px;
+    max-height: 150px;
+    margin: 0px;
+    padding: 0px;
+    background-size: contain;
+}
+
+

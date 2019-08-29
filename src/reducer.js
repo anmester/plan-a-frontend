@@ -10,7 +10,7 @@ function userReducer(state = defaultState.user, action) {
       return action.payload;
     case "RETRIEVE_USER":
       return action.payload;
-    case "SIGN_IN_USER":
+    case "SIGN_UP_USER":
       return action.payload;
     default:
       return state;
