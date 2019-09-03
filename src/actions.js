@@ -1,3 +1,4 @@
+// log in user
 function loginUser(dispatch, user, history) {
   return function() {
     return fetch("http://localhost:3000/login", {
@@ -24,6 +25,7 @@ function loginUser(dispatch, user, history) {
   };
 }
 
+// check if user is logged in
 function retrieveUser(dispatch, token, history, location) {
   return function() {
     return fetch("http://localhost:3000/retrieve_user", {
@@ -56,6 +58,7 @@ function retrieveUser(dispatch, token, history, location) {
   };
 }
 
+// sign up new user
 function signUp(dispatch, user, history) {
   return function() {
     return fetch("http://localhost:3000/users", {
@@ -81,4 +84,24 @@ function signUp(dispatch, user, history) {
   };
 }
 
-export { loginUser, retrieveUser, signUp };
+// fetch restaurants on category choice
+function fetchRestaurants(dispatch) {
+  return function() {
+    return fetch(
+      "https://opentable.herokuapp.com/api/restaurants?city=New%20York"
+    )
+      .then(res => res.json())
+      .then(restaurantData => {
+        dispatch({ type: "FETCH_RESTAURANTS", payload: restaurantData });
+      });
+  };
+}
+
+// set selected activity
+function setActivity(dispatch, activity) {
+  return function() {
+    return dispatch({ type: "SET_ACTIVITY", payload: activity });
+  };
+}
+
+export { loginUser, retrieveUser, signUp, fetchRestaurants, setActivity };

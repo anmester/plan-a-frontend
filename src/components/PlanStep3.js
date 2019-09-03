@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { Link, Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 
-export default class PlanStep2 extends React.Component {
+export default class PlanStep3 extends React.Component {
   state = {
     stopNumber: 1
   };
@@ -13,19 +13,39 @@ export default class PlanStep2 extends React.Component {
     scrollSpy.update();
   }
 
-  clickHandler = e => {
-    if (this.state.stopNumber < 3) {
-      this.setState({ stopNumber: (this.state.stopNumber += 1) });
-    } else {
-      this.setState({ stopNumber: 0 });
-    }
-  };
-
   render() {
+    let dropdownWidth = {
+      width: 10 + "em"
+    };
+
+    let dropdownAlign = {
+      display: "inline"
+    };
+
+    let categories = this.props.activityCategories.map(category => (
+      <option value={category}>{category}</option>
+    ));
+
     return (
       <div className="stop-container">
         <div className="row">
-          <div className="card-deck">
+          <div className="card-block">
+            <div className="form">
+              <div className="form-group">
+                <label>Choose Activity Category</label>
+                <select
+                  className="form-control"
+                  id="category-select"
+                  style={{ ...dropdownWidth, ...dropdownAlign }}
+                  onChange={e => {
+                    e.preventDefault();
+                    this.props.handleCategoryChange(e);
+                  }}
+                >
+                  {categories}
+                </select>
+              </div>
+            </div>
             <Link
               activeClass="active"
               to="finalize-plan"
@@ -34,13 +54,7 @@ export default class PlanStep2 extends React.Component {
               offset={-100}
               duration={500}
             >
-              <button
-                onClick={this.clickHandler}
-                className="card-block"
-                name="stop-3"
-              >
-                CHOOSE STOP 3
-              </button>
+              <button name="stop-3">CHOOSE STOP 3</button>
             </Link>
           </div>
         </div>

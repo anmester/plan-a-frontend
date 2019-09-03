@@ -3,15 +3,15 @@ body {
 }
 
 .container-fluid { 
-  max-width: 1200px; 
-  height: 1000px; 
-  margin-top: 8em
+  max-width: 1500px; 
+  height: 300px; 
+  margin-top: 6em
 }
 
-.stop-container { 
+/* .stop-container { 
   max-width: 1200px; 
   height: 1000px; 
-}
+} */
 
 .login-card {
   background: #fff;
@@ -29,8 +29,8 @@ body {
 
 .card-block {
   background: #fff;
-  width: 18em;
-  height: 6em;
+  width: 12em;
+  height: 8em;
   border: none;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   text-align: center;
@@ -39,7 +39,9 @@ body {
   margin-bottom: 2em;
   margin-left: 2em;
   margin-right: 2em;
-  font-family: "Source Sans Pro"
+  font-family: "Source Sans Pro";
+  padding-top: 15px;
+  align-content: 'center'
 }
 
 [class*="row"] {
@@ -105,3 +107,19 @@ a {
 }
 
 
+.plan-select-container {
+  float: left;
+  width: 35%;
+  padding: 10px;
+  height: 622.63px;
+  /* overflow: hidden */
+}
+
+.map-container {
+  float: left;
+  width: 65%;
+}
+
+.mapbox-gl-map {
+  height: 1000px
+}
