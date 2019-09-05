@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Marker, Popup } from "react-map-gl";
 import { connect } from "react-redux";
-import { fetchRestaurants } from "../actions.js";
+import { fetchRestaurants, setActivity } from "../actions.js";
 
 function RestaurantMap(props) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
@@ -39,6 +39,7 @@ function RestaurantMap(props) {
             onClose={() => {
               setSelectedRestaurant(null);
             }}
+            closeOnClick={false}
           >
             <div>
               <h4>{selectedRestaurant.name}</h4>
@@ -46,20 +47,27 @@ function RestaurantMap(props) {
               <p>{selectedRestaurant.address}</p>
               <p>{selectedRestaurant.price}</p>
               <br></br>
-              <button>Make Stop</button>
+              <button
+                onClick={() => {
+                  props.setActivity(selectedRestaurant);
+                }}
+              >
+                Make Stop
+              </button>
             </div>
           </Popup>
         ) : null}
       </>
     );
   } else {
-    return <h1>hi</h1>;
+    return <h1></h1>;
   }
 }
 
 function msp(state) {
   return {
-    restaurants: state.restaurants
+    restaurants: state.restaurants,
+    activities: state.activities
   };
 }
 
@@ -67,6 +75,10 @@ function mdp(dispatch) {
   return {
     fetchRestaurants: () => {
       fetchRestaurants(dispatch)();
+    },
+
+    setActivity: selectedRestaurant => {
+      setActivity(dispatch, selectedRestaurant)();
     }
   };
 }

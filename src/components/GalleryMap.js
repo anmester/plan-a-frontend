@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "../App.css";
 import { Marker, Popup } from "react-map-gl";
 import * as Gallery from "../data/nycArtGalleries.json";
+import { connect } from "react-redux";
+import { setActivity } from "../actions.js";
 
-export default function GalleryMap() {
+function GalleryMap(props) {
   const [selectedGallery, setSelectedGallery] = useState(null);
 
   return (
@@ -33,16 +35,42 @@ export default function GalleryMap() {
           onClose={() => {
             setSelectedGallery(null);
           }}
+          closeOnClick={false}
         >
           <div>
             <h4>{selectedGallery.properties.name}</h4>
             <p>{selectedGallery.properties.address1}</p>
             <a href={selectedGallery.properties.url}>Website</a>
             <br></br>
-            <button>Make Stop</button>
+            <button
+              onClick={() => {
+                props.setActivity(selectedGallery);
+              }}
+            >
+              Make Stop
+            </button>
           </div>
         </Popup>
       ) : null}
     </>
   );
 }
+
+function msp(state) {
+  return {
+    activities: state.activities
+  };
+}
+
+function mdp(dispatch) {
+  return {
+    setActivity: selectedGallery => {
+      setActivity(dispatch, selectedGallery)();
+    }
+  };
+}
+
+export default connect(
+  msp,
+  mdp
+)(GalleryMap);

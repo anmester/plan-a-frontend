@@ -3,7 +3,8 @@ import { combineReducers } from "redux";
 const defaultState = {
   user: {},
   restaurants: {},
-  activities: []
+  activities: [],
+  plan: {}
 };
 
 function userReducer(state = defaultState.user, action) {
@@ -13,6 +14,18 @@ function userReducer(state = defaultState.user, action) {
     case "RETRIEVE_USER":
       return action.payload;
     case "SIGN_UP_USER":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function planReducer(state = defaultState.plan, action) {
+  console.log("inside plan reducer - submit", action.payload);
+  switch (action.type) {
+    case "CREATE_PLAN":
+      return action.payload;
+    case "SUBMIT_PLAN":
       return action.payload;
     default:
       return state;
@@ -40,7 +53,8 @@ function activityReducer(state = defaultState.activities, action) {
 const reducer = combineReducers({
   user: userReducer,
   restaurants: restaurantReducer,
-  activities: activityReducer
+  activities: activityReducer,
+  plan: planReducer
 });
 
 export default reducer;
