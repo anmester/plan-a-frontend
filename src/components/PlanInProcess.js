@@ -1,10 +1,10 @@
 import React from "react";
 import "../App.css";
 import { connect } from "react-redux";
+import { removeActivity } from "../actions";
 
 class PlanInProcess extends React.Component {
   render() {
-    console.log(this.props.plan);
     return (
       <div className="stop-container">
         <div className="row">
@@ -13,7 +13,18 @@ class PlanInProcess extends React.Component {
               <p>{this.props.plan.planName}</p>
               <ul>
                 {this.props.activities.map(activity => (
-                  <li>{activity.properties.name}</li>
+                  <li>
+                    {console.log(activity, "activity")}
+                    {activity.properties.name} &nbsp;
+                    <button
+                      onClick={e => {
+                        e.preventDefault();
+                        this.props.removeActivity(activity);
+                      }}
+                    >
+                      x
+                    </button>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -31,7 +42,15 @@ function msp(state) {
   };
 }
 
+function mdp(dispatch) {
+  return {
+    removeActivity: activity => {
+      removeActivity(dispatch, activity)();
+    }
+  };
+}
+
 export default connect(
   msp,
-  null
+  mdp
 )(PlanInProcess);

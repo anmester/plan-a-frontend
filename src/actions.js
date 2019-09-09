@@ -84,7 +84,7 @@ function signUp(dispatch, user, history) {
   };
 }
 
-// create plan
+// save plan to store
 function createPlan(dispatch, plan) {
   console.log("plan", plan);
   return function() {
@@ -109,6 +109,13 @@ function fetchRestaurants(dispatch) {
 function setActivity(dispatch, activity) {
   return function() {
     return dispatch({ type: "SET_ACTIVITY", payload: activity });
+  };
+}
+
+// remove selected activity
+function removeActivity(dispatch, targetActivity) {
+  return function() {
+    return dispatch({ type: "REMOVE_ACTIVITY", payload: targetActivity });
   };
 }
 
@@ -166,7 +173,6 @@ function addPlanActivities(dispatch, plan, activities) {
       .then(res => res.json())
       .then(data => {
         console.log("plan activities", data);
-        // dispatch({ type: "ADD_PLAN_ACTIVITIES", payload: data });
       })
   );
 }
@@ -179,5 +185,6 @@ export {
   setActivity,
   createPlan,
   finalizePlan,
-  addPlanActivities
+  addPlanActivities,
+  removeActivity
 };

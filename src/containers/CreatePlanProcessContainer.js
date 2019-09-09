@@ -52,28 +52,33 @@ export default function CreatePlanProcessContainer(props) {
   };
 
   return (
-    <>
-      <div className="plan-select-container">
-        <PlanStepChoice
-          activityCategories={activityCategories}
-          handleCategoryChange={handleCategoryChange}
-        />
-        <PlanInProcess />
-        <FinalizePlan planInProgress={props.planInProgress} />
-      </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div className="plan-select-container col-md-4" style={{ top: 40 }}>
+          <PlanStepChoice
+            activityCategories={activityCategories}
+            handleCategoryChange={handleCategoryChange}
+          />
+          <PlanInProcess />
+          <FinalizePlan planInProgress={props.planInProgress} />
+        </div>
 
-      <div className="map-container">
-        <ReactMapGL
-          {...viewport}
-          mapboxApiAccessToken={mapboxToken}
-          onViewportChange={viewport => {
-            setViewport(viewport);
-          }}
-          activityCategories={activityCategories}
+        <div
+          className="map-container col-md-7"
+          style={{ position: "fixed", top: 0, right: 123 }}
         >
-          {renderActivityMap(category)}
-        </ReactMapGL>
+          <ReactMapGL
+            {...viewport}
+            mapboxApiAccessToken={mapboxToken}
+            onViewportChange={viewport => {
+              setViewport(viewport);
+            }}
+            activityCategories={activityCategories}
+          >
+            {renderActivityMap(category)}
+          </ReactMapGL>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

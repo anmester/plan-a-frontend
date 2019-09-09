@@ -20,6 +20,7 @@ class FinalizePlan extends React.Component {
                   this.props.activities
                 );
                 this.props.planInProgress();
+                alert("Your plan has been created!");
               }}
             >
               FINALIZE PLAN

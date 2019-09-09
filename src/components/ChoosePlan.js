@@ -4,6 +4,7 @@ import { Link, Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 import { connect } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { createPlan } from "../actions";
+import RandomPlanButton from "./RandomPlanButton";
 
 class ChoosePlan extends React.Component {
   state = {
@@ -94,13 +95,9 @@ class ChoosePlan extends React.Component {
               offset={50}
               duration={500}
             >
-              <button
-                onClick={this.clickHandler}
-                className="card-block"
-                name="random-plan"
-              >
+              <RandomPlanButton className="card-block" name="random-plan">
                 RANDOM PLAN
-              </button>
+              </RandomPlanButton>
             </Link>
           </div>
         </div>

@@ -2,11 +2,11 @@ body {
   font-family: Helvetica, sans serif;
 }
 
-.container-fluid { 
+/* .container-fluid { 
   max-width: 1500px; 
   height: 300px; 
   margin-top: 4em
-}
+} */
 
 /* .stop-container { 
   max-width: 1200px; 
@@ -49,13 +49,13 @@ body {
   justify-content: center;
 }
 
-[class*="col-"] {
+/* [class*="col-"] {
 	background: #efefef;
 	border: 1px solid #ddd;
 	padding-top: .75rem;
 	padding-bottom: .75rem;
 	width: 100%;
-}
+} */
 
 .recipe_if, .recipe_then {
     font-weight: bold;
@@ -108,18 +108,21 @@ a {
 
 
 .plan-select-container {
-  float: left;
-  width: 35%;
-  padding: 10px;
-  height: 622.63px;
-  /* overflow: hidden */
+  overflow-y: scroll;
+  padding: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
-.map-container {
+/* .map-container {
   float: left;
-  width: 65%;
-}
+  width: 100vw;
+  height: 100vh;
+  position: fixed
+} */
 
-.mapbox-gl-map {
-  height: 1000px
-}
+/* .mapbox-gl-map {
+  height: 100%
+} */

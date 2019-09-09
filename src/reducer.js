@@ -45,6 +45,11 @@ function activityReducer(state = defaultState.activities, action) {
   switch (action.type) {
     case "SET_ACTIVITY":
       return [...state, action.payload];
+    case "REMOVE_ACTIVITY":
+      let updatedActivities = state.filter(
+        activity => action.payload.properties.name !== activity.properties.name
+      );
+      return updatedActivities;
     default:
       return state;
   }
