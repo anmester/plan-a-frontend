@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
-import PlanStep1 from "../components/PlanStep1";
-import PlanStep2 from "../components/PlanStep2";
-import PlanStep3 from "../components/PlanStep3";
+import PlanStepChoice from "../components/PlanStepChoice";
+import PlanInProcess from "../components/PlanInProcess";
 import FinalizePlan from "../components/FinalizePlan";
 import ReactMapGL from "react-map-gl";
 import GalleryMap from "../components/GalleryMap";
@@ -53,35 +52,33 @@ export default function CreatePlanProcessContainer(props) {
   };
 
   return (
-    <>
-      <div className="plan-select-container">
-        <PlanStep1
-          activityCategories={activityCategories}
-          handleCategoryChange={handleCategoryChange}
-        />
-        <PlanStep2
-          activityCategories={activityCategories}
-          handleCategoryChange={handleCategoryChange}
-        />
-        <PlanStep3
-          activityCategories={activityCategories}
-          handleCategoryChange={handleCategoryChange}
-        />
-        <FinalizePlan />
-      </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div className="plan-select-container col-md-4" style={{ top: 40 }}>
+          <PlanStepChoice
+            activityCategories={activityCategories}
+            handleCategoryChange={handleCategoryChange}
+          />
+          <PlanInProcess />
+          <FinalizePlan planInProgress={props.planInProgress} />
+        </div>
 
-      <div className="map-container">
-        <ReactMapGL
-          {...viewport}
-          mapboxApiAccessToken={mapboxToken}
-          onViewportChange={viewport => {
-            setViewport(viewport);
-          }}
-          activityCategories={activityCategories}
+        <div
+          className="map-container col-md-7"
+          style={{ position: "fixed", top: 0, right: 123 }}
         >
-          {renderActivityMap(category)}
-        </ReactMapGL>
+          <ReactMapGL
+            {...viewport}
+            mapboxApiAccessToken={mapboxToken}
+            onViewportChange={viewport => {
+              setViewport(viewport);
+            }}
+            activityCategories={activityCategories}
+          >
+            {renderActivityMap(category)}
+          </ReactMapGL>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

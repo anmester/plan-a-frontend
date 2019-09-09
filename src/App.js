@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "./App.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import HomeNav from "./components/HomeNav";

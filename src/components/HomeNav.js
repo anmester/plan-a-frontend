@@ -19,9 +19,9 @@ class HomeNav extends React.Component {
           <Nav.Link href={`/${this.props.user.username}/plans`}>
             My Plans
           </Nav.Link>
-          <Nav.Link href={`/${this.props.user.username}/reviews`}>
+          {/* <Nav.Link href={`/${this.props.user.username}/reviews`}>
             My Reviews
-          </Nav.Link>
+          </Nav.Link> */}
         </Nav>
         <Form inline>
           <Button variant="outline-secondary" onClick={this.logoutUser}>

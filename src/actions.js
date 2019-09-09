@@ -84,6 +84,14 @@ function signUp(dispatch, user, history) {
   };
 }
 
+// save plan to store
+function createPlan(dispatch, plan) {
+  console.log("plan", plan);
+  return function() {
+    return dispatch({ type: "CREATE_PLAN", payload: plan });
+  };
+}
+
 // fetch restaurants on category choice
 function fetchRestaurants(dispatch) {
   return function() {
@@ -104,4 +112,79 @@ function setActivity(dispatch, activity) {
   };
 }
 
-export { loginUser, retrieveUser, signUp, fetchRestaurants, setActivity };
+// remove selected activity
+function removeActivity(dispatch, targetActivity) {
+  return function() {
+    return dispatch({ type: "REMOVE_ACTIVITY", payload: targetActivity });
+  };
+}
+
+// create plan
+function finalizePlan(dispatch, user, plan, activities) {
+  console.log("inside finalize plan in actions", user, plan, activities);
+  return function() {
+    return fetch("http://localhost:3000/plans", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify({
+        plan: {
+          user_id: user.id,
+          name: plan.planName,
+          date: plan.planDate
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("what was posted", data);
+        dispatch({ type: "SUBMIT_PLAN", payload: data });
+      })
+      .then(data => {
+        console.log("data returned after post", data);
+        addPlanActivities(data, plan, activities);
+      });
+  };
+}
+
+// add plan activities to plan_activities
+function addPlanActivities(dispatch, plan, activities) {
+  console.log(
+    "inside finalize plan in actions",
+    "this is activities?",
+    activities,
+    "this is plan?",
+    plan
+  );
+  return activities.map(activity =>
+    fetch("http://localhost:3000/plan_activities", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify({
+        plan: plan,
+        activity: activity
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("plan activities", data);
+      })
+  );
+}
+
+export {
+  loginUser,
+  retrieveUser,
+  signUp,
+  fetchRestaurants,
+  setActivity,
+  createPlan,
+  finalizePlan,
+  addPlanActivities,
+  removeActivity
+};

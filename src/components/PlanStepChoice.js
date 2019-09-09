@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { Link, Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 
-export default class PlanStep2 extends React.Component {
+export default class PlanStepChoice extends React.Component {
   state = {
     stopNumber: 1
   };
@@ -23,7 +23,9 @@ export default class PlanStep2 extends React.Component {
     };
 
     let categories = this.props.activityCategories.map(category => (
-      <option value={category}>{category}</option>
+      <option value={category} key={category}>
+        {category}
+      </option>
     ));
 
     return (
@@ -48,13 +50,13 @@ export default class PlanStep2 extends React.Component {
             </div>
             <Link
               activeClass="active"
-              to="stop-3"
+              to="finalize-plan"
               spy={true}
               smooth={true}
               offset={-100}
               duration={500}
             >
-              <button name="stop-2">CHOOSE STOP 2</button>
+              <button name="stop-1">CHOOSE STOP</button>
             </Link>
           </div>
         </div>
