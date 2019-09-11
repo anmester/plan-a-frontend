@@ -17,7 +17,7 @@ class PlansContainer extends React.Component {
 
   fetchPlans() {
     let userId = this.props.user.id;
-    fetch("http://localhost:3000/plans")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans`)
       .then(res => res.json())
       .then(plans => {
         let targetPlans = plans.filter(plan => plan.user_id === userId);
@@ -28,7 +28,7 @@ class PlansContainer extends React.Component {
   fetchTargetActivities = (e, plan) => {
     let planID = plan.id;
 
-    fetch(`http://localhost:3000/plans/${planID}/activities`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans/${planID}/activities`)
       .then(res => res.json())
       .then(targetActivities => {
         this.setState({ activities: targetActivities });
@@ -49,7 +49,7 @@ class PlansContainer extends React.Component {
     e.preventDefault();
     let planID = plan.id;
 
-    fetch(`http://localhost:3000/plans/${planID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans/${planID}`, {
       method: "DELETE"
     })
       .then(res => res.json())

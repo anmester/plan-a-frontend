@@ -24,7 +24,7 @@ function RandomPlanModal(props) {
   const handleFinalize = () => setFinalized(true);
 
   const handleShow = () => {
-    fetch("http://localhost:3000/random-plan")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/random-plan`)
       .then(res => res.json())
       .then(randomActivities => {
         console.log("random activities", randomActivities);

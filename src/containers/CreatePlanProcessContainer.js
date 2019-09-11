@@ -21,8 +21,7 @@ function CreatePlanProcessContainer(props) {
     zoom: 12
   });
 
-  const mapboxToken =
-    "pk.eyJ1IjoiYW5tZXN0ZXIiLCJhIjoiY2p6d3R4NW14MHRvNzNkdGF5NDRmb3VxeiJ9.2PwjgvDzOAyvCXmeuSX8SA";
+  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
   const activityCategories = [
     "Galleries & Museums",
