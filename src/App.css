@@ -1,18 +1,22 @@
+/* body */
 body {
-  font-family: Helvetica, sans serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
-/* .container-fluid { 
-  max-width: 1500px; 
-  height: 300px; 
-  margin-top: 4em
-} */
+/* navbar */
+.navbar {
+  font-family: 'Roboto Mono', monospace; 
+  background: #4c0bd1;
+  color: white
+}
 
-/* .stop-container { 
-  max-width: 1200px; 
-  height: 1000px; 
-} */
+.button {
+  background: #4c0bd1;
+  color: white;
+  border: none
+}
 
+/* login and signup cards */
 .login-card {
   background: #fff;
   width: 18em;
@@ -24,13 +28,15 @@ body {
   margin-bottom: 2em;
   margin-left: 2em;
   margin-right: 2em;
-  font-family: "Source Sans Pro"
+  font-family: 'Roboto Mono', monospace;
 }
 
+/* all cards across app */
 .card-block {
   background: #fff;
-  width: 12em;
-  height: 8em;
+  font-family: 'Roboto Mono', monospace;
+  resize: both;
+  width: 14em;
   border: none;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   text-align: center;
@@ -39,46 +45,111 @@ body {
   margin-bottom: 2em;
   margin-left: 2em;
   margin-right: 2em;
-  font-family: "Source Sans Pro";
   padding-top: 15px;
+  padding-bottom: 15px;
   align-content: 'center'
 }
 
-[class*="row"] {
-	margin-bottom: 1em;
-  justify-content: center;
+.fixed-height-card {
+  max-height: 50vh;
+  max-width: 31vh;
+  margin-right: 1em;
+  margin-left: 1em;
+  border: 5px solid #4c0bd1;
 }
 
-/* [class*="col-"] {
-	background: #efefef;
-	border: 1px solid #ddd;
-	padding-top: .75rem;
-	padding-bottom: .75rem;
-	width: 100%;
-} */
-
-.recipe_if, .recipe_then {
-    font-weight: bold;
-    font-size: 80px;
+/* create or choose random plan */
+.plan-select {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  font-family: 'Roboto Mono', monospace;
 }
 
-.tagline {
-  font-weight: normal;
-  font-size: 44px;
+.container-fluid {
+  display: inline-block
 }
 
+/* homepage choose create or random  */
+.choose-plan {
+  background: url('./bgtest7.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh
+}
+
+/* link styling */
 a {
  font-weight: bold;
  text-decoration: none;
  color: #33CCFF;
 }
 
+/* welcome screen styling */
 .welcome-container {
   margin: 0px auto;
   width: 700px;
   margin-top: 90px;
 }
 
+/* creating plan */
+.plan-select-container {
+  overflow-y: scroll;
+  margin: auto;
+  padding: 100;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  background: url('./planContainerBG.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* selected activities in plan */
+.target-activities {
+  font-size: 14px;
+  text-align: left;
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* map loading */
+.loading-layer {
+  background: lightblue;
+  font-family: 'Roboto Mono', monospace;
+  opacity: 0.2;
+  width: 100vw;
+  height: 100vh;
+  font-size: 30px;
+  align-content: center
+}
+
+/* choosing random or create your own plan */
+.select-plan {
+  font-size: 26px;
+  font-family: 'Roboto Mono', monospace; 
+  font-weight: bold
+}
+
+.subheader {
+  font-size: 13px;
+  font-weight: normal
+}
+
+/* updating font across all app */
+#form {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.correctFont {
+  font-family: 'Roboto Mono', monospace;
+}
+
+/* welcome screen word scroll */
 .slottt-machine-recipe {
   margin: 0px auto;
   width: 700px;
@@ -106,23 +177,66 @@ a {
     background-size: contain;
 }
 
-
-.plan-select-container {
-  overflow-y: scroll;
-  padding: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
+.recipe_if, .recipe_then {
+  font-weight: bold;
+  font-size: 80px;
 }
 
-/* .map-container {
-  float: left;
-  width: 100vw;
-  height: 100vh;
-  position: fixed
-} */
+.tagline {
+font-weight: normal;
+font-size: 44px;
+}
 
-/* .mapbox-gl-map {
-  height: 100%
-} */
+/* align choose cat // activ list // finalize plan with background */
+.choose-list-finalize {
+  margin-left: 11vh;
+  margin-top: 3.5vw
+}
+
+/* align create and random plan buttons with background */
+.create-align {
+  position: fixed;
+  left: 21.5vw;
+  top: 39.3vh;
+}
+
+.random-align {
+  position: fixed;
+  left: 40.5vw;
+  top: 39.3vh;
+}
+
+/* plans container background */
+.plans-container {
+  background: url('./planList.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh
+}
+
+/* profile container background */
+.user-profile-container {
+  background: url('./userProfileContainer.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh
+}
+
+.profile-card {
+  padding-top: 31.75vh;
+}
+
+.user-profile{
+  margin-top: 0;
+  width: 45vh;
+  margin-left: 85vh;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  background: transparent;
+  box-shadow: none;
+  color: white
+}

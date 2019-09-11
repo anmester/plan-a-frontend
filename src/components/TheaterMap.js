@@ -1,71 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Marker, Popup } from "react-map-gl";
-import * as Theater from "../data/nycTheaters.json";
 import { connect } from "react-redux";
-import { setActivity } from "../actions.js";
+import { setActivity, fetchTheaters } from "../actions.js";
+import LoadingLayer from "./LoadingLayer";
 
 function TheaterMap(props) {
   const [selectedTheater, setSelectedTheater] = useState(null);
 
-  return (
-    <>
-      {Theater.features.map(theater => (
-        <Marker
-          key={theater.properties.name}
-          latitude={theater.geometry.coordinates[1]}
-          longitude={theater.geometry.coordinates[0]}
-        >
-          <button
-            className="btn btn small"
-            onClick={e => {
-              e.preventDefault();
-              setSelectedTheater(theater);
-            }}
-          >
-            <i>🎭</i>
-          </button>
-        </Marker>
-      ))}
+  useEffect(() => {
+    props.fetchTheaters();
+  });
 
-      {selectedTheater ? (
-        <Popup
-          latitude={selectedTheater.geometry.coordinates[1]}
-          longitude={selectedTheater.geometry.coordinates[0]}
-          onClose={() => {
-            setSelectedTheater(null);
-          }}
-          closeOnClick={false}
-        >
-          <div>
-            <h4>{selectedTheater.properties.name}</h4>
-            <p>{selectedTheater.properties.address1}</p>
-            <a href={selectedTheater.properties.url}>Website</a>
-            <br></br>
+  if (props.theaters[0]) {
+    return (
+      <>
+        {props.theaters.map(theater => (
+          <Marker
+            key={theater.id}
+            latitude={Number(theater.latitude)}
+            longitude={Number(theater.longitude)}
+            offsetLeft={-15}
+            offsetTop={-14}
+          >
             <button
-              onClick={() => {
-                props.setActivity(selectedTheater);
+              className="btn btn small"
+              onClick={e => {
+                e.preventDefault();
+                setSelectedTheater(theater);
               }}
             >
-              Make Stop
+              <i className="fas fa-map-marker-alt" alt="map-marker"></i>
             </button>
-          </div>
-        </Popup>
-      ) : null}
-    </>
-  );
+          </Marker>
+        ))}
+
+        {selectedTheater ? (
+          <Popup
+            latitude={Number(selectedTheater.latitude)}
+            longitude={Number(selectedTheater.longitude)}
+            onClose={() => {
+              setSelectedTheater(null);
+            }}
+            closeOnClick={false}
+            id="form"
+          >
+            <div>
+              <h4>{selectedTheater.name}</h4>
+              <br></br>
+              <button
+                onClick={() => {
+                  props.setActivity(selectedTheater);
+                }}
+              >
+                Make Stop
+              </button>
+            </div>
+          </Popup>
+        ) : null}
+      </>
+    );
+  } else {
+    return <LoadingLayer />;
+  }
 }
 
 function msp(state) {
   return {
+    theaters: state.theaters,
     activities: state.activities
   };
 }
 
 function mdp(dispatch) {
   return {
-    setActivity: selectedTheater => {
-      setActivity(dispatch, selectedTheater)();
+    fetchTheaters: () => {
+      fetchTheaters(dispatch)();
+    },
+
+    setActivity: setSelectedTheater => {
+      setActivity(dispatch, setSelectedTheater)();
     }
   };
 }

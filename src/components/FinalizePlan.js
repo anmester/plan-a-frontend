@@ -11,6 +11,7 @@ class FinalizePlan extends React.Component {
           <div className="card-deck">
             <button
               className="card-block"
+              id="form"
               name="finalize-plan"
               onClick={e => {
                 e.preventDefault();

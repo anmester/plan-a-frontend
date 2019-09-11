@@ -2,24 +2,24 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Marker, Popup } from "react-map-gl";
 import { connect } from "react-redux";
-import { setActivity, fetchGalleries } from "../actions.js";
+import { fetchBars, setActivity } from "../actions.js";
 import LoadingLayer from "./LoadingLayer";
 
-function GalleryMap(props) {
-  const [selectedGallery, setSelectedGallery] = useState(null);
+function BarMap(props) {
+  const [selectedBar, setSelectedBar] = useState(null);
 
   useEffect(() => {
-    props.fetchGalleries();
+    props.fetchBars();
   });
 
-  if (props.galleries[0]) {
+  if (props.bars[0]) {
     return (
       <>
-        {props.galleries.map(gallery => (
+        {props.bars.map(bar => (
           <Marker
-            key={gallery.id}
-            latitude={Number(gallery.latitude)}
-            longitude={Number(gallery.longitude)}
+            key={bar.id}
+            latitude={Number(bar.latitude)}
+            longitude={Number(bar.longitude)}
             offsetLeft={-15}
             offsetTop={-14}
           >
@@ -27,7 +27,7 @@ function GalleryMap(props) {
               className="btn btn small"
               onClick={e => {
                 e.preventDefault();
-                setSelectedGallery(gallery);
+                setSelectedBar(bar);
               }}
             >
               <i className="fas fa-map-marker-alt" alt="map-marker"></i>
@@ -35,22 +35,24 @@ function GalleryMap(props) {
           </Marker>
         ))}
 
-        {selectedGallery ? (
+        {selectedBar ? (
           <Popup
-            latitude={Number(selectedGallery.latitude)}
-            longitude={Number(selectedGallery.longitude)}
+            latitude={Number(selectedBar.latitude)}
+            longitude={Number(selectedBar.longitude)}
             onClose={() => {
-              setSelectedGallery(null);
+              setSelectedBar(null);
             }}
             closeOnClick={false}
             className="correctFont"
           >
             <div>
-              <h4>{selectedGallery.name}</h4>
+              <h4>{selectedBar.name}</h4>
+              <p>{selectedBar.description}</p>
+              <p>{selectedBar.link}</p>
               <br></br>
               <button
                 onClick={() => {
-                  props.setActivity(selectedGallery);
+                  props.setActivity(selectedBar);
                 }}
               >
                 Make Stop
@@ -67,18 +69,19 @@ function GalleryMap(props) {
 
 function msp(state) {
   return {
-    activities: state.activities,
-    galleries: state.galleries
+    bars: state.bars,
+    activities: state.activities
   };
 }
 
 function mdp(dispatch) {
   return {
-    setActivity: selectedGallery => {
-      setActivity(dispatch, selectedGallery)();
+    fetchBars: () => {
+      fetchBars(dispatch)();
     },
-    fetchGalleries: () => {
-      fetchGalleries(dispatch)();
+
+    setActivity: selectedBar => {
+      setActivity(dispatch, selectedBar)();
     }
   };
 }
@@ -86,4 +89,4 @@ function mdp(dispatch) {
 export default connect(
   msp,
   mdp
-)(GalleryMap);
+)(BarMap);

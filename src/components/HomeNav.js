@@ -11,20 +11,17 @@ class HomeNav extends React.Component {
 
   render() {
     return (
-      <Navbar bg="light" variant="light" sticky="top" className="navbar">
+      <Navbar variant="dark" sticky="top" className="navbar">
         <Navbar.Brand href="/welcome">Plan A</Navbar.Brand>
-        <Nav className="mr-auto">
+        <Nav className="mr-auto navbar">
           <Nav.Link href="/welcome">Home</Nav.Link>
           <Nav.Link href={`/${this.props.user.username}`}>Profile</Nav.Link>
           <Nav.Link href={`/${this.props.user.username}/plans`}>
             My Plans
           </Nav.Link>
-          {/* <Nav.Link href={`/${this.props.user.username}/reviews`}>
-            My Reviews
-          </Nav.Link> */}
         </Nav>
         <Form inline>
-          <Button variant="outline-secondary" onClick={this.logoutUser}>
+          <Button variant="outline-light" onClick={this.logoutUser}>
             Logout
           </Button>
         </Form>

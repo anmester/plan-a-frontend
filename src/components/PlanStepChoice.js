@@ -31,33 +31,42 @@ export default class PlanStepChoice extends React.Component {
     return (
       <div className="stop-container">
         <div className="row">
-          <div className="card-block">
-            <div className="form">
-              <div className="form-group">
-                <label>Choose Activity Category</label>
-                <select
-                  className="form-control"
-                  id="category-select"
-                  style={{ ...dropdownWidth, ...dropdownAlign }}
-                  onChange={e => {
-                    e.preventDefault();
-                    this.props.handleCategoryChange(e);
-                  }}
-                >
-                  {categories}
-                </select>
+          <div className="card-deck">
+            <div className="card-block" id="form">
+              <div className="form">
+                <div className="form-group">
+                  <label>Choose Activity Category</label>
+                  <select
+                    className="form-control"
+                    id="category-select"
+                    style={{ ...dropdownWidth, ...dropdownAlign }}
+                    onChange={e => {
+                      e.preventDefault();
+                      this.props.handleCategoryChange(e);
+                    }}
+                  >
+                    {categories}
+                  </select>
+                </div>
               </div>
+              <Link
+                activeClass="active"
+                to="finalize-plan"
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={500}
+              >
+                <button
+                  name="view-map"
+                  onClick={this.props.showStopMap}
+                  id="form"
+                  className="button"
+                >
+                  VIEW YOUR MAP
+                </button>
+              </Link>
             </div>
-            <Link
-              activeClass="active"
-              to="finalize-plan"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-            >
-              <button name="stop-1">CHOOSE STOP</button>
-            </Link>
           </div>
         </div>
       </div>

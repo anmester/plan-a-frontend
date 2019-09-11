@@ -7,11 +7,15 @@ import ReactMapGL from "react-map-gl";
 import GalleryMap from "../components/GalleryMap";
 import TheaterMap from "../components/TheaterMap";
 import RestaurantMap from "../components/RestaurantMap";
+import OutdoorEventsMap from "../components/OutdoorEventsMap";
+import StopsMap from "../components/StopsMap";
+import BarMap from "../components/BarMap";
+import { connect } from "react-redux";
 
-export default function CreatePlanProcessContainer(props) {
+function CreatePlanProcessContainer(props) {
   const [viewport, setViewport] = useState({
-    latitude: 40.74961163174836,
-    longitude: -73.98639731142578,
+    latitude: 40.7447,
+    longitude: -73.9485,
     width: "100vw",
     height: "100vh",
     zoom: 12
@@ -21,13 +25,11 @@ export default function CreatePlanProcessContainer(props) {
     "pk.eyJ1IjoiYW5tZXN0ZXIiLCJhIjoiY2p6d3R4NW14MHRvNzNkdGF5NDRmb3VxeiJ9.2PwjgvDzOAyvCXmeuSX8SA";
 
   const activityCategories = [
-    "Gallery",
-    "Museum",
-    "Restaurant",
-    "Park",
-    "Theater",
-    "Bar",
-    "Swimming"
+    "Galleries & Museums",
+    "Restaurants",
+    "Outdoor Events",
+    "Theaters",
+    "Bars"
   ];
 
   const [category, setCategory] = useState(null);
@@ -39,33 +41,50 @@ export default function CreatePlanProcessContainer(props) {
   };
 
   const renderActivityMap = category => {
-    if (category === "Theater") {
+    if (category === "Theaters") {
       return <TheaterMap />;
     }
-    if (category === "Gallery") {
+    if (category === "Galleries & Museums") {
       return <GalleryMap />;
     }
-    if (category === "Restaurant") {
+    if (category === "Restaurants") {
       return <RestaurantMap />;
+    }
+    if (category === "Outdoor Events") {
+      return <OutdoorEventsMap />;
+    }
+    if (category === "Bars") {
+      return <BarMap />;
+    }
+    if (category === "stopMap") {
+      return <StopsMap />;
     }
     return null;
   };
 
+  const showStopMap = e => {
+    e.preventDefault();
+    setCategory("stopMap");
+  };
+
   return (
-    <div class="container-fluid">
-      <div class="row">
+    <div className="container-fluid" id="form">
+      <div className="row">
         <div className="plan-select-container col-md-4" style={{ top: 40 }}>
-          <PlanStepChoice
-            activityCategories={activityCategories}
-            handleCategoryChange={handleCategoryChange}
-          />
-          <PlanInProcess />
-          <FinalizePlan planInProgress={props.planInProgress} />
+          <div className="choose-list-finalize">
+            <PlanStepChoice
+              activityCategories={activityCategories}
+              handleCategoryChange={handleCategoryChange}
+              showStopMap={showStopMap}
+            />
+            <PlanInProcess />
+            <FinalizePlan planInProgress={props.planInProgress} />
+          </div>
         </div>
 
         <div
-          className="map-container col-md-7"
-          style={{ position: "fixed", top: 0, right: 123 }}
+          className="map-container col-md-8"
+          style={{ position: "fixed", top: 0, right: 0 }}
         >
           <ReactMapGL
             {...viewport}
@@ -75,6 +94,7 @@ export default function CreatePlanProcessContainer(props) {
             }}
             activityCategories={activityCategories}
           >
+            <StopsMap />
             {renderActivityMap(category)}
           </ReactMapGL>
         </div>
@@ -82,3 +102,14 @@ export default function CreatePlanProcessContainer(props) {
     </div>
   );
 }
+
+function msp(state) {
+  return {
+    activities: state.activites
+  };
+}
+
+export default connect(
+  msp,
+  null
+)(CreatePlanProcessContainer);

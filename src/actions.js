@@ -95,12 +95,55 @@ function createPlan(dispatch, plan) {
 // fetch restaurants on category choice
 function fetchRestaurants(dispatch) {
   return function() {
-    return fetch(
-      "https://opentable.herokuapp.com/api/restaurants?city=New%20York"
-    )
+    return fetch("http://localhost:3000/restaurants")
       .then(res => res.json())
       .then(restaurantData => {
+        console.log(restaurantData, "restaurantData");
         dispatch({ type: "FETCH_RESTAURANTS", payload: restaurantData });
+      });
+  };
+}
+
+// fetch bars on category choice
+function fetchBars(dispatch) {
+  return function() {
+    return fetch("http://localhost:3000/bars")
+      .then(res => res.json())
+      .then(barData => {
+        dispatch({ type: "FETCH_BARS", payload: barData });
+      });
+  };
+}
+
+// fetch theaters on category choice
+function fetchTheaters(dispatch) {
+  return function() {
+    return fetch("http://localhost:3000/theaters")
+      .then(res => res.json())
+      .then(theaterData => {
+        dispatch({ type: "FETCH_THEATERS", payload: theaterData });
+      });
+  };
+}
+
+// fetch galleries on category choice
+function fetchGalleries(dispatch) {
+  return function() {
+    return fetch("http://localhost:3000/galleries")
+      .then(res => res.json())
+      .then(galleryData => {
+        dispatch({ type: "FETCH_GALLERIES", payload: galleryData });
+      });
+  };
+}
+
+// fetch outdoor events on category choice
+function fetchOutdoorEvents(dispatch) {
+  return function() {
+    return fetch("http://localhost:3000/outdoor-events")
+      .then(res => res.json())
+      .then(outdoorEventData => {
+        dispatch({ type: "FETCH_OUTDOOR_EVENTS", payload: outdoorEventData });
       });
   };
 }
@@ -116,6 +159,13 @@ function setActivity(dispatch, activity) {
 function removeActivity(dispatch, targetActivity) {
   return function() {
     return dispatch({ type: "REMOVE_ACTIVITY", payload: targetActivity });
+  };
+}
+
+// reset activities
+function resetActivities(dispatch, activities) {
+  return function() {
+    return dispatch({ type: "RESET_ACTIVITIES", payload: activities });
   };
 }
 
@@ -177,6 +227,18 @@ function addPlanActivities(dispatch, plan, activities) {
   );
 }
 
+// get random plan
+function getRandomPlan(dispatch) {
+  return function() {
+    return fetch("http://localhost:3000/random-plan")
+      .then(res => res.json())
+      .then(randomActivities => {
+        console.log("random activities", randomActivities);
+        dispatch({ type: "GET_RANDOM_ACTIVITIES", payload: randomActivities });
+      });
+  };
+}
+
 export {
   loginUser,
   retrieveUser,
@@ -186,5 +248,11 @@ export {
   createPlan,
   finalizePlan,
   addPlanActivities,
-  removeActivity
+  removeActivity,
+  fetchTheaters,
+  fetchGalleries,
+  fetchOutdoorEvents,
+  resetActivities,
+  fetchBars,
+  getRandomPlan
 };

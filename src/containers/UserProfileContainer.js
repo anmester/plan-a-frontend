@@ -5,10 +5,24 @@ import { connect } from "react-redux";
 class UserProfileContainer extends React.Component {
   render() {
     return (
-      <>
-        <h2>Name: {this.props.user.username}</h2>
-        <p>Allergies: {this.props.user.allergies}</p>
-      </>
+      <div className="user-profile-container">
+        <div className="profile-card">
+          <div className="card-block user-profile" id="form">
+            <h2>
+              <strong>Username:</strong> {this.props.user.username}
+            </h2>
+            <p>
+              <strong>Allergies:</strong> {this.props.user.allergies}
+            </p>
+            <a
+              href={`/${this.props.user.username}/plans`}
+              style={{ color: "#ff7948" }}
+            >
+              View Your Plans
+            </a>
+          </div>
+        </div>
+      </div>
     );
   }
 }

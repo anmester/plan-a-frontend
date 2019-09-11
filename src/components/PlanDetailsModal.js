@@ -10,7 +10,7 @@ export default function PlanDetailsModal(props) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="button" onClick={handleShow} id="form">
         Show Plan Details
       </Button>
 
@@ -18,11 +18,18 @@ export default function PlanDetailsModal(props) {
         show={show}
         onHide={handleClose}
         onClick={e => props.fetchTargetActivities(e, props.plan)}
+        className="correctFont"
       >
         <Modal.Header closeButton>
           <Modal.Title>{props.plan.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>
+            <strong>Date:</strong> {props.plan.date.slice(0, 10)}
+          </p>
+          <p>
+            <strong>Your Activities:</strong>
+          </p>
           <ul>
             {props.activities.map(activity => (
               <li key={activity.id}>{activity.name}</li>
@@ -30,7 +37,10 @@ export default function PlanDetailsModal(props) {
           </ul>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
+          {/* <Button variant="secondary" onClick={handleClose}>
+            Edit Plan
+          </Button> */}
+          <Button className="button" onClick={handleClose}>
             Close Plan Details
           </Button>
         </Modal.Footer>
