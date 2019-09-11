@@ -3,7 +3,7 @@ import "../App.css";
 import { connect } from "react-redux";
 import { loginUser } from "../actions";
 import { withRouter } from "react-router-dom";
-import { Card, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
 class Login extends React.Component {
   state = {

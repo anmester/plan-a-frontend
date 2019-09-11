@@ -12,6 +12,7 @@ export default function PlanDetailsButton(props) {
       fetchTargetActivities={props.fetchTargetActivities}
       plan={props.plan}
       activities={props.activities}
+      id="form"
     />
   );
 }

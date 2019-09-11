@@ -3,6 +3,7 @@ import "../App.css";
 import { Marker, Popup } from "react-map-gl";
 import { connect } from "react-redux";
 import { fetchRestaurants, setActivity } from "../actions.js";
+import LoadingLayer from "./LoadingLayer";
 
 function RestaurantMap(props) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
@@ -11,14 +12,16 @@ function RestaurantMap(props) {
     props.fetchRestaurants();
   });
 
-  if (props.restaurants.restaurants) {
+  if (props.restaurants[0]) {
     return (
       <>
-        {props.restaurants.restaurants.map(restaurant => (
+        {props.restaurants.map(restaurant => (
           <Marker
             key={restaurant.id}
-            latitude={restaurant.lat}
-            longitude={restaurant.lng}
+            latitude={Number(restaurant.latitude)}
+            longitude={Number(restaurant.longitude)}
+            offsetLeft={-15}
+            offsetTop={-14}
           >
             <button
               className="btn btn small"
@@ -27,25 +30,25 @@ function RestaurantMap(props) {
                 setSelectedRestaurant(restaurant);
               }}
             >
-              <i>🍴</i>
+              <i className="fas fa-map-marker-alt" alt="map-marker"></i>
             </button>
           </Marker>
         ))}
 
         {selectedRestaurant ? (
           <Popup
-            latitude={selectedRestaurant.lat}
-            longitude={selectedRestaurant.lng}
+            latitude={Number(selectedRestaurant.latitude)}
+            longitude={Number(selectedRestaurant.longitude)}
             onClose={() => {
               setSelectedRestaurant(null);
             }}
             closeOnClick={false}
+            id="form"
           >
             <div>
               <h4>{selectedRestaurant.name}</h4>
-              <img src={selectedRestaurant.image_url} />
-              <p>{selectedRestaurant.address}</p>
-              <p>{selectedRestaurant.price}</p>
+              <p>{selectedRestaurant.description}</p>
+              <p>{selectedRestaurant.link}</p>
               <br></br>
               <button
                 onClick={() => {
@@ -60,7 +63,7 @@ function RestaurantMap(props) {
       </>
     );
   } else {
-    return <h1></h1>;
+    return <LoadingLayer />;
   }
 }
 

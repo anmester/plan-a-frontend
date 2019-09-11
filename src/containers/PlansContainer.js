@@ -17,7 +17,7 @@ class PlansContainer extends React.Component {
 
   fetchPlans() {
     let userId = this.props.user.id;
-    fetch("http://localhost:3000/plans")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans`)
       .then(res => res.json())
       .then(plans => {
         let targetPlans = plans.filter(plan => plan.user_id === userId);
@@ -28,7 +28,7 @@ class PlansContainer extends React.Component {
   fetchTargetActivities = (e, plan) => {
     let planID = plan.id;
 
-    fetch(`http://localhost:3000/plans/${planID}/activities`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans/${planID}/activities`)
       .then(res => res.json())
       .then(targetActivities => {
         this.setState({ activities: targetActivities });
@@ -49,7 +49,7 @@ class PlansContainer extends React.Component {
     e.preventDefault();
     let planID = plan.id;
 
-    fetch(`http://localhost:3000/plans/${planID}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plans/${planID}`, {
       method: "DELETE"
     })
       .then(res => res.json())
@@ -64,8 +64,9 @@ class PlansContainer extends React.Component {
 
   render() {
     let planNames = this.state.plans.map(plan => (
-      <div className="card-block" key={plan.id}>
+      <div className="card-block" id="form" key={plan.id}>
         {plan.name}
+        <br></br>
         <br></br>
         <PlanDetailsButton
           plan={plan}
@@ -74,19 +75,31 @@ class PlansContainer extends React.Component {
         />
         <br></br>
         <br></br>
-        <Button variant="primary" onClick={e => this.deletePlan(e, plan)}>
+        <Button
+          className="button"
+          onClick={e => this.deletePlan(e, plan)}
+          id="form"
+        >
           Delete Plan
         </Button>
       </div>
     ));
 
+    let nameStyler = {
+      marginLeft: 87 + "vh",
+      color: "white"
+    };
+
     return (
-      <>
-        <h2 style={{ textAlign: "center" }}>
-          {this.props.user.username}'s Plans
-        </h2>
-        <div className="card-group">{planNames}</div>
-      </>
+      <div className="plans-container" id="form">
+        <br></br>
+        <h2 style={nameStyler}>{this.props.user.username}'s Plans</h2>
+        <br></br>
+        <br></br>
+        <div className="card-group" style={{ marginLeft: 18 + "vh" }}>
+          {planNames}
+        </div>
+      </div>
     );
   }
 }

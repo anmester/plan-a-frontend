@@ -1,7 +1,7 @@
 // log in user
 function loginUser(dispatch, user, history) {
   return function() {
-    return fetch("http://localhost:3000/login", {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function loginUser(dispatch, user, history) {
 // check if user is logged in
 function retrieveUser(dispatch, token, history, location) {
   return function() {
-    return fetch("http://localhost:3000/retrieve_user", {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/retrieve_user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function retrieveUser(dispatch, token, history, location) {
 // sign up new user
 function signUp(dispatch, user, history) {
   return function() {
-    return fetch("http://localhost:3000/users", {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,12 +95,55 @@ function createPlan(dispatch, plan) {
 // fetch restaurants on category choice
 function fetchRestaurants(dispatch) {
   return function() {
-    return fetch(
-      "https://opentable.herokuapp.com/api/restaurants?city=New%20York"
-    )
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/restaurants`)
       .then(res => res.json())
       .then(restaurantData => {
+        console.log(restaurantData, "restaurantData");
         dispatch({ type: "FETCH_RESTAURANTS", payload: restaurantData });
+      });
+  };
+}
+
+// fetch bars on category choice
+function fetchBars(dispatch) {
+  return function() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/bars`)
+      .then(res => res.json())
+      .then(barData => {
+        dispatch({ type: "FETCH_BARS", payload: barData });
+      });
+  };
+}
+
+// fetch theaters on category choice
+function fetchTheaters(dispatch) {
+  return function() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/theaters`)
+      .then(res => res.json())
+      .then(theaterData => {
+        dispatch({ type: "FETCH_THEATERS", payload: theaterData });
+      });
+  };
+}
+
+// fetch galleries on category choice
+function fetchGalleries(dispatch) {
+  return function() {
+    return fetch(```${process.env.REACT_APP_BACKEND_URL}/galleries`)
+      .then(res => res.json())
+      .then(galleryData => {
+        dispatch({ type: "FETCH_GALLERIES", payload: galleryData });
+      });
+  };
+}
+
+// fetch outdoor events on category choice
+function fetchOutdoorEvents(dispatch) {
+  return function() {
+    return fetch(```${process.env.REACT_APP_BACKEND_URL}/outdoor-events`)
+      .then(res => res.json())
+      .then(outdoorEventData => {
+        dispatch({ type: "FETCH_OUTDOOR_EVENTS", payload: outdoorEventData });
       });
   };
 }
@@ -119,11 +162,18 @@ function removeActivity(dispatch, targetActivity) {
   };
 }
 
+// reset activities
+function resetActivities(dispatch, activities) {
+  return function() {
+    return dispatch({ type: "RESET_ACTIVITIES", payload: activities });
+  };
+}
+
 // create plan
 function finalizePlan(dispatch, user, plan, activities) {
   console.log("inside finalize plan in actions", user, plan, activities);
   return function() {
-    return fetch("http://localhost:3000/plans", {
+    return fetch(```${process.env.REACT_APP_BACKEND_URL}/plans`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -159,7 +209,7 @@ function addPlanActivities(dispatch, plan, activities) {
     plan
   );
   return activities.map(activity =>
-    fetch("http://localhost:3000/plan_activities", {
+    fetch(```${process.env.REACT_APP_BACKEND_URL}/plan_activities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -177,6 +227,18 @@ function addPlanActivities(dispatch, plan, activities) {
   );
 }
 
+// get random plan
+function getRandomPlan(dispatch) {
+  return function() {
+    return fetch(```${process.env.REACT_APP_BACKEND_URL}/random-plan`)
+      .then(res => res.json())
+      .then(randomActivities => {
+        console.log("random activities", randomActivities);
+        dispatch({ type: "GET_RANDOM_ACTIVITIES", payload: randomActivities });
+      });
+  };
+}
+
 export {
   loginUser,
   retrieveUser,
@@ -186,5 +248,11 @@ export {
   createPlan,
   finalizePlan,
   addPlanActivities,
-  removeActivity
+  removeActivity,
+  fetchTheaters,
+  fetchGalleries,
+  fetchOutdoorEvents,
+  resetActivities,
+  fetchBars,
+  getRandomPlan
 };

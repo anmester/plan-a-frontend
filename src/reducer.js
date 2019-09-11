@@ -4,6 +4,10 @@ const defaultState = {
   user: {},
   restaurants: {},
   activities: [],
+  theaters: {},
+  galleries: {},
+  outdoorEvents: {},
+  bars: {},
   plan: {}
 };
 
@@ -21,7 +25,6 @@ function userReducer(state = defaultState.user, action) {
 }
 
 function planReducer(state = defaultState.plan, action) {
-  console.log("inside plan reducer - submit", action.payload);
   switch (action.type) {
     case "CREATE_PLAN":
       return action.payload;
@@ -41,15 +44,58 @@ function restaurantReducer(state = defaultState.restaurants, action) {
   }
 }
 
+function barReducer(state = defaultState.bars, action) {
+  switch (action.type) {
+    case "FETCH_BARS":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function theatersReducer(state = defaultState.theaters, action) {
+  switch (action.type) {
+    case "FETCH_THEATERS":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function galleriesReducer(state = defaultState.galleries, action) {
+  switch (action.type) {
+    case "FETCH_GALLERIES":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function outdoorEventsReducer(state = defaultState.outdoorEvents, action) {
+  switch (action.type) {
+    case "FETCH_OUTDOOR_EVENTS":
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 function activityReducer(state = defaultState.activities, action) {
   switch (action.type) {
     case "SET_ACTIVITY":
       return [...state, action.payload];
     case "REMOVE_ACTIVITY":
       let updatedActivities = state.filter(
-        activity => action.payload.properties.name !== activity.properties.name
+        activity => action.payload.id !== activity.id
       );
       return updatedActivities;
+    case "GET_RANDOM_ACTIVITIES":
+      return [...state, action.payload];
+    case "RESET_ACTIVITIES":
+      console.log("action payload", action.payload);
+      action.payload = [];
+      console.log("resetting actionpayload", action.payload);
+      return action.payload;
     default:
       return state;
   }
@@ -59,7 +105,11 @@ const reducer = combineReducers({
   user: userReducer,
   restaurants: restaurantReducer,
   activities: activityReducer,
-  plan: planReducer
+  plan: planReducer,
+  theaters: theatersReducer,
+  galleries: galleriesReducer,
+  outdoorEvents: outdoorEventsReducer,
+  bars: barReducer
 });
 
 export default reducer;

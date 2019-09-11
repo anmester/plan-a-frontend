@@ -2,24 +2,24 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Marker, Popup } from "react-map-gl";
 import { connect } from "react-redux";
-import { setActivity, fetchGalleries } from "../actions.js";
+import { setActivity, fetchOutdoorEvents } from "../actions.js";
 import LoadingLayer from "./LoadingLayer";
 
-function GalleryMap(props) {
-  const [selectedGallery, setSelectedGallery] = useState(null);
+function OutdoorEventsMap(props) {
+  const [selectedOutdoorEvent, setSelectedOutdoorEvent] = useState(null);
 
   useEffect(() => {
-    props.fetchGalleries();
+    props.fetchOutdoorEvents();
   });
 
-  if (props.galleries[0]) {
+  if (props.outdoorEvents[0]) {
     return (
       <>
-        {props.galleries.map(gallery => (
+        {props.outdoorEvents.map(outdoorEvent => (
           <Marker
-            key={gallery.id}
-            latitude={Number(gallery.latitude)}
-            longitude={Number(gallery.longitude)}
+            key={outdoorEvent.id}
+            latitude={Number(outdoorEvent.latitude)}
+            longitude={Number(outdoorEvent.longitude)}
             offsetLeft={-15}
             offsetTop={-14}
           >
@@ -27,7 +27,7 @@ function GalleryMap(props) {
               className="btn btn small"
               onClick={e => {
                 e.preventDefault();
-                setSelectedGallery(gallery);
+                setSelectedOutdoorEvent(outdoorEvent);
               }}
             >
               <i className="fas fa-map-marker-alt" alt="map-marker"></i>
@@ -35,22 +35,22 @@ function GalleryMap(props) {
           </Marker>
         ))}
 
-        {selectedGallery ? (
+        {selectedOutdoorEvent ? (
           <Popup
-            latitude={Number(selectedGallery.latitude)}
-            longitude={Number(selectedGallery.longitude)}
+            latitude={Number(selectedOutdoorEvent.latitude)}
+            longitude={Number(selectedOutdoorEvent.longitude)}
             onClose={() => {
-              setSelectedGallery(null);
+              setSelectedOutdoorEvent(null);
             }}
             closeOnClick={false}
             className="correctFont"
           >
             <div>
-              <h4>{selectedGallery.name}</h4>
+              <h4>{selectedOutdoorEvent.name}</h4>
               <br></br>
               <button
                 onClick={() => {
-                  props.setActivity(selectedGallery);
+                  props.setActivity(selectedOutdoorEvent);
                 }}
               >
                 Make Stop
@@ -68,17 +68,18 @@ function GalleryMap(props) {
 function msp(state) {
   return {
     activities: state.activities,
-    galleries: state.galleries
+    outdoorEvents: state.outdoorEvents
   };
 }
 
 function mdp(dispatch) {
   return {
-    setActivity: selectedGallery => {
-      setActivity(dispatch, selectedGallery)();
+    fetchOutdoorEvents: () => {
+      fetchOutdoorEvents(dispatch)();
     },
-    fetchGalleries: () => {
-      fetchGalleries(dispatch)();
+
+    setActivity: selectedOutdoorEvent => {
+      setActivity(dispatch, selectedOutdoorEvent)();
     }
   };
 }
@@ -86,4 +87,4 @@ function mdp(dispatch) {
 export default connect(
   msp,
   mdp
-)(GalleryMap);
+)(OutdoorEventsMap);
