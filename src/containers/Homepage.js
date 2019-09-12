@@ -76,6 +76,9 @@ export default class Homepage extends React.Component {
     // consider fixing links on lines 92 & 94 and making buttons then redirecting with new function onClick
     return (
       <div className="welcome-container">
+        <br></br>
+        <br></br>
+        <br></br>
         <div className="slottt-machine-recipe">
           <div className="tagline">Plan A...</div>
           <div className="slottt-machine-recipe__mask" id="wordbox">

@@ -173,7 +173,7 @@ function resetActivities(dispatch, activities) {
 function finalizePlan(dispatch, user, plan, activities) {
   console.log("inside finalize plan in actions", user, plan, activities);
   return function() {
-    return fetch(```${process.env.REACT_APP_BACKEND_URL}/plans`, {
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/plans`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

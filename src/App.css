@@ -31,6 +31,22 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
+/* login and signup containers */
+.login-signup {
+  margin-top: 13vh;
+  margin-left: 65vh;
+}
+
+.ls-container {
+  background: url('./loginSignup.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  background-attachment: fixed
+}
+
 /* all cards across app */
 .card-block {
   background: #fff;
@@ -79,7 +95,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  height: 100vh
+  height: 100vh;
+  background-attachment: fixed
 }
 
 /* link styling */
@@ -92,8 +109,17 @@ a {
 /* welcome screen styling */
 .welcome-container {
   margin: 0px auto;
-  width: 700px;
-  margin-top: 90px;
+  background: url('./welcomeBackground.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  background-attachment: fixed
+}
+
+.welcome-buttons {
+  margin-left: 67.1vh
 }
 
 /* creating plan */
@@ -183,8 +209,8 @@ a {
 }
 
 .tagline {
-font-weight: normal;
-font-size: 44px;
+  font-weight: normal;
+  font-size: 44px;
 }
 
 /* align choose cat // activ list // finalize plan with background */
@@ -196,14 +222,25 @@ font-size: 44px;
 /* align create and random plan buttons with background */
 .create-align {
   position: fixed;
-  left: 21.5vw;
-  top: 39.3vh;
+  left: 21.8vw;
+  top: 38.3vh;
 }
 
 .random-align {
   position: fixed;
-  left: 40.5vw;
-  top: 39.3vh;
+  left: 40.8vw;
+  top: 38.3vh;
+  height: 50em
+}
+
+/* random button card */
+.random-card {
+  height: 7.25em
+}
+
+/* navbar logo  */
+.nav-logo {
+  font-size: 2em
 }
 
 /* plans container background */
@@ -213,7 +250,7 @@ font-size: 44px;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  height: 100vh
+  height: 100vh;
 }
 
 /* profile container background */
@@ -223,7 +260,8 @@ font-size: 44px;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  height: 100vh
+  height: 100vh;
+  background-attachment: fixed
 }
 
 .profile-card {
@@ -231,7 +269,7 @@ font-size: 44px;
 }
 
 .user-profile{
-  margin-top: 0;
+  margin-top: -11vh;
   width: 45vh;
   margin-left: 85vh;
   padding-left: 1vh;

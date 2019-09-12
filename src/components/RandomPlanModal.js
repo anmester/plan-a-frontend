@@ -35,7 +35,6 @@ function RandomPlanModal(props) {
 
   const submitHandler = e => {
     e.preventDefault();
-    console.log("planName", planName, "planDate", planDate);
     let currentDate = new Date();
     let validatePlanDate = new Date(planDate);
 
@@ -50,7 +49,10 @@ function RandomPlanModal(props) {
 
   return (
     <>
-      <button className="card-block fixed-height-card" onClick={handleShow}>
+      <button
+        className="card-block fixed-height-card random-card"
+        onClick={handleShow}
+      >
         <h2 className="select-plan">Random Plan</h2>
         <p className="select-plan subheader">CLICK TO GET STARTED</p>
       </button>

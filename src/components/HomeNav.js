@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import { Navbar, Nav, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
+import Logo from "../planALogo.png";
 
 class HomeNav extends React.Component {
   logoutUser = () => {
@@ -12,7 +13,18 @@ class HomeNav extends React.Component {
   render() {
     return (
       <Navbar variant="dark" sticky="top" className="navbar">
-        <Navbar.Brand href="/welcome">Plan A</Navbar.Brand>
+        <Navbar.Brand href="/welcome">
+          <img
+            alt=""
+            src={Logo}
+            width="50"
+            height="50"
+            className="d-inline-block align-top"
+          />
+        </Navbar.Brand>
+        <Navbar.Brand className="nav-logo" href="/welcome">
+          Plan A
+        </Navbar.Brand>
         <Nav className="mr-auto navbar">
           <Nav.Link href="/welcome">Home</Nav.Link>
           <Nav.Link href={`/${this.props.user.username}`}>Profile</Nav.Link>

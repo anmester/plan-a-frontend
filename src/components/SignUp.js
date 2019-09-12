@@ -23,8 +23,8 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
+      <div className="container-fluid ls-container">
+        <div className="row login-signup">
           <div className="card-deck">
             <div className="login-card" style={{ width: 18 + "em" }}>
               <div className="card-body">
