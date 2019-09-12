@@ -39,25 +39,12 @@ class HomeNav extends React.Component {
           <a className="nav-link">
             <Link to={`/${this.props.user.username}/plans`}>My Plans</Link>
           </a>
-          {/* <Nav.Link href={`/${this.props.user.username}`}>Profile</Nav.Link>
-          <Nav.Link href={`/${this.props.user.username}/plans`}>
-            My Plans
-          </Nav.Link> */}
         </Nav>
         <Form inline>
           <Button variant="outline-light" onClick={this.logoutUser}>
             Logout
           </Button>
         </Form>
-        {/* <Route path="/welcome" render={() => PlanCreateContainer} />
-        <Route
-          path={`/${this.props.user.username}`}
-          render={() => UserProfileContainer}
-        />
-        <Route
-          path={`/${this.props.user.username}/plans`}
-          render={() => PlansContainer}
-        /> */}
       </Navbar>
     );
   }
