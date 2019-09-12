@@ -129,7 +129,7 @@ function fetchTheaters(dispatch) {
 // fetch galleries on category choice
 function fetchGalleries(dispatch) {
   return function() {
-    return fetch(```${process.env.REACT_APP_BACKEND_URL}/galleries`)
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/galleries`)
       .then(res => res.json())
       .then(galleryData => {
         dispatch({ type: "FETCH_GALLERIES", payload: galleryData });
@@ -140,7 +140,7 @@ function fetchGalleries(dispatch) {
 // fetch outdoor events on category choice
 function fetchOutdoorEvents(dispatch) {
   return function() {
-    return fetch(```${process.env.REACT_APP_BACKEND_URL}/outdoor-events`)
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/outdoor-events`)
       .then(res => res.json())
       .then(outdoorEventData => {
         dispatch({ type: "FETCH_OUTDOOR_EVENTS", payload: outdoorEventData });
@@ -209,7 +209,7 @@ function addPlanActivities(dispatch, plan, activities) {
     plan
   );
   return activities.map(activity =>
-    fetch(```${process.env.REACT_APP_BACKEND_URL}/plan_activities`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/plan_activities`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -230,7 +230,7 @@ function addPlanActivities(dispatch, plan, activities) {
 // get random plan
 function getRandomPlan(dispatch) {
   return function() {
-    return fetch(```${process.env.REACT_APP_BACKEND_URL}/random-plan`)
+    return fetch(`${process.env.REACT_APP_BACKEND_URL}/random-plan`)
       .then(res => res.json())
       .then(randomActivities => {
         console.log("random activities", randomActivities);
