@@ -68,6 +68,7 @@ body {
 
 .fixed-height-card {
   max-height: 50vh;
+  min-height: 7.25em;
   max-width: 31vh;
   margin-right: 1em;
   margin-left: 1em;
