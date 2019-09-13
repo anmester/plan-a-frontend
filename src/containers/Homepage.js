@@ -73,7 +73,6 @@ export default class Homepage extends React.Component {
   }
 
   render() {
-    // consider fixing links on lines 92 & 94 and making buttons then redirecting with new function onClick
     return (
       <div className="welcome-container">
         <br></br>

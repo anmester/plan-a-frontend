@@ -10,7 +10,14 @@ export default function PlanDetailsModal(props) {
 
   return (
     <>
-      <Button className="button" onClick={handleShow} id="form">
+      <Button
+        className="button"
+        onClick={e => {
+          handleShow();
+          props.fetchTargetActivities(e, props.plan);
+        }}
+        id="form"
+      >
         Show Plan Details
       </Button>
 
